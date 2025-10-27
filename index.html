@@ -16,12 +16,20 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .container {
             max-width: 900px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 15px;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 20px;
+            }
         }
 
         /* Landing Page */
@@ -34,36 +42,60 @@
             text-align: center;
             color: white;
             animation: fadeIn 1s ease-in;
+            padding: 20px;
         }
 
         h1 {
-            font-size: 3.5em;
-            margin-bottom: 20px;
+            font-size: 2em;
+            margin-bottom: 15px;
             text-shadow: 3px 3px 10px rgba(0,0,0,0.3);
             animation: float 3s ease-in-out infinite;
+            line-height: 1.2;
+        }
+
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 3.5em;
+                margin-bottom: 20px;
+            }
         }
 
         .emoji-large {
-            font-size: 5em;
-            margin-bottom: 20px;
+            font-size: 3em;
+            margin-bottom: 15px;
             animation: pulse 2s ease-in-out infinite;
         }
 
+        @media (min-width: 768px) {
+            .emoji-large {
+                font-size: 5em;
+                margin-bottom: 20px;
+            }
+        }
+
         .subtitle {
-            font-size: 1.3em;
+            font-size: 1.1em;
             max-width: 700px;
-            margin: 20px auto;
+            margin: 15px auto;
             line-height: 1.6;
             background: rgba(255,255,255,0.1);
-            padding: 30px;
+            padding: 20px;
             border-radius: 20px;
             backdrop-filter: blur(10px);
         }
 
+        @media (min-width: 768px) {
+            .subtitle {
+                font-size: 1.3em;
+                margin: 20px auto;
+                padding: 30px;
+            }
+        }
+
         .start-btn {
-            margin-top: 40px;
-            padding: 20px 50px;
-            font-size: 1.5em;
+            margin-top: 30px;
+            padding: 15px 35px;
+            font-size: 1.2em;
             background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
             border: none;
             border-radius: 50px;
@@ -72,6 +104,15 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             font-weight: bold;
             color: #764ba2;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        @media (min-width: 768px) {
+            .start-btn {
+                margin-top: 40px;
+                padding: 20px 50px;
+                font-size: 1.5em;
+            }
         }
 
         .start-btn:hover {
@@ -79,23 +120,40 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.4);
         }
 
+        .start-btn:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
         /* Quiz Container */
         #quiz-container {
             display: none;
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 20px 10px;
+        }
+
+        @media (min-width: 768px) {
+            #quiz-container {
+                padding: 40px 20px;
+            }
         }
 
         .challenge-card {
             background: white;
-            border-radius: 30px;
-            padding: 40px;
+            border-radius: 20px;
+            padding: 25px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             margin: 20px auto;
             max-width: 800px;
             animation: slideIn 0.5s ease-out;
             opacity: 0;
             animation-fill-mode: forwards;
+        }
+
+        @media (min-width: 768px) {
+            .challenge-card {
+                border-radius: 30px;
+                padding: 40px;
+            }
         }
 
         .challenge-card.active {
@@ -105,39 +163,71 @@
         .challenge-number {
             display: inline-block;
             background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 50px;
             font-weight: bold;
             color: #764ba2;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+
+        @media (min-width: 768px) {
+            .challenge-number {
+                padding: 10px 20px;
+                margin-bottom: 20px;
+                font-size: 1em;
+            }
         }
 
         .question {
-            font-size: 1.8em;
-            margin: 20px 0;
+            font-size: 1.4em;
+            margin: 15px 0;
             color: #333;
             font-weight: 600;
+            line-height: 1.3;
+        }
+
+        @media (min-width: 768px) {
+            .question {
+                font-size: 1.8em;
+                margin: 20px 0;
+            }
         }
 
         /* Multiple Choice */
         .options {
             display: grid;
-            gap: 15px;
-            margin: 30px 0;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        @media (min-width: 768px) {
+            .options {
+                gap: 15px;
+                margin: 30px 0;
+            }
         }
 
         .option {
-            padding: 20px;
+            padding: 15px;
             background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
             border: 3px solid transparent;
             border-radius: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 1.1em;
+            font-size: 1em;
             text-align: left;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .option:hover {
+        @media (min-width: 768px) {
+            .option {
+                padding: 20px;
+                font-size: 1.1em;
+            }
+        }
+
+        .option:hover, .option:active {
             transform: translateX(10px);
             border-color: #764ba2;
             box-shadow: 0 5px 15px rgba(118, 75, 162, 0.3);
@@ -152,13 +242,21 @@
         /* Text Input */
         textarea, input[type="text"] {
             width: 100%;
-            padding: 20px;
-            font-size: 1.1em;
+            padding: 15px;
+            font-size: 1em;
             border: 3px solid #ffecd2;
             border-radius: 15px;
             margin: 20px 0;
             font-family: inherit;
             transition: all 0.3s ease;
+            resize: vertical;
+        }
+
+        @media (min-width: 768px) {
+            textarea, input[type="text"] {
+                padding: 20px;
+                font-size: 1.1em;
+            }
         }
 
         textarea:focus, input[type="text"]:focus {
@@ -203,9 +301,25 @@
         .word-search-grid {
             display: grid;
             grid-template-columns: repeat(10, 1fr);
-            gap: 5px;
-            margin: 30px auto;
-            max-width: 500px;
+            gap: 3px;
+            margin: 20px auto;
+            max-width: 100%;
+            padding: 0 5px;
+        }
+
+        @media (min-width: 480px) {
+            .word-search-grid {
+                gap: 4px;
+                max-width: 400px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .word-search-grid {
+                gap: 5px;
+                margin: 30px auto;
+                max-width: 500px;
+            }
         }
 
         .word-cell {
@@ -215,14 +329,30 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            border-radius: 8px;
+            border-radius: 5px;
             cursor: pointer;
             transition: all 0.2s ease;
-            font-size: 1.2em;
+            font-size: 0.9em;
             color: #333;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
         }
 
-        .word-cell:hover {
+        @media (min-width: 480px) {
+            .word-cell {
+                border-radius: 6px;
+                font-size: 1em;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .word-cell {
+                border-radius: 8px;
+                font-size: 1.2em;
+            }
+        }
+
+        .word-cell:hover, .word-cell:active {
             transform: scale(1.1);
         }
 
@@ -234,16 +364,31 @@
         .words-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 10px;
             justify-content: center;
-            margin: 20px 0;
+            margin: 15px 0;
+        }
+
+        @media (min-width: 768px) {
+            .words-list {
+                gap: 15px;
+                margin: 20px 0;
+            }
         }
 
         .word-item {
-            padding: 10px 20px;
+            padding: 8px 15px;
             background: #f0f0f0;
             border-radius: 20px;
             font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        @media (min-width: 768px) {
+            .word-item {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
         }
 
         .word-item.found {
@@ -255,45 +400,75 @@
         #flappyCanvas {
             width: 100%;
             max-width: 400px;
-            height: 500px;
-            border: 5px solid #764ba2;
-            border-radius: 20px;
+            height: auto;
+            aspect-ratio: 4 / 5;
+            border: 4px solid #764ba2;
+            border-radius: 15px;
             display: block;
             margin: 20px auto;
             background: linear-gradient(to bottom, #a8edea 0%, #fed6e3 100%);
+            touch-action: none;
+        }
+
+        @media (min-width: 768px) {
+            #flappyCanvas {
+                border: 5px solid #764ba2;
+                border-radius: 20px;
+            }
         }
 
         .game-instructions {
             text-align: center;
-            font-size: 1.2em;
-            margin: 20px 0;
+            font-size: 1em;
+            margin: 15px 0;
             color: #764ba2;
             font-weight: bold;
+            line-height: 1.4;
+        }
+
+        @media (min-width: 768px) {
+            .game-instructions {
+                font-size: 1.2em;
+                margin: 20px 0;
+            }
         }
 
         .game-score {
             text-align: center;
-            font-size: 2em;
+            font-size: 1.5em;
             color: #764ba2;
             font-weight: bold;
             margin: 10px 0;
+        }
+
+        @media (min-width: 768px) {
+            .game-score {
+                font-size: 2em;
+            }
         }
 
         /* Image Challenge */
         .challenge-image {
             width: 100%;
             max-width: 500px;
-            margin: 20px auto;
+            margin: 15px auto;
             display: block;
-            border-radius: 20px;
+            border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        @media (min-width: 768px) {
+            .challenge-image {
+                margin: 20px auto;
+                border-radius: 20px;
+            }
         }
 
         /* Next Button */
         .next-btn {
-            margin-top: 30px;
-            padding: 15px 40px;
-            font-size: 1.2em;
+            margin-top: 25px;
+            padding: 12px 30px;
+            font-size: 1.1em;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
@@ -305,11 +480,24 @@
             display: block;
             margin-left: auto;
             margin-right: auto;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        @media (min-width: 768px) {
+            .next-btn {
+                margin-top: 30px;
+                padding: 15px 40px;
+                font-size: 1.2em;
+            }
         }
 
         .next-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .next-btn:active {
+            transform: translateY(-1px);
         }
 
         .next-btn:disabled {
@@ -321,11 +509,18 @@
         /* Progress Bar */
         .progress-bar {
             width: 100%;
-            height: 10px;
+            height: 8px;
             background: rgba(255,255,255,0.3);
             border-radius: 10px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .progress-bar {
+                height: 10px;
+                margin-bottom: 30px;
+            }
         }
 
         .progress-fill {
@@ -339,25 +534,46 @@
         #final-screen {
             display: none;
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 30px 15px;
             text-align: center;
             color: white;
         }
 
+        @media (min-width: 768px) {
+            #final-screen {
+                padding: 40px 20px;
+            }
+        }
+
         .final-card {
             background: white;
-            border-radius: 30px;
-            padding: 50px;
+            border-radius: 20px;
+            padding: 30px 20px;
             max-width: 700px;
             margin: 0 auto;
             color: #333;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
 
+        @media (min-width: 768px) {
+            .final-card {
+                border-radius: 30px;
+                padding: 50px;
+            }
+        }
+
         .final-card h2 {
-            font-size: 2.5em;
-            margin-bottom: 30px;
+            font-size: 2em;
+            margin-bottom: 20px;
             color: #764ba2;
+            line-height: 1.2;
+        }
+
+        @media (min-width: 768px) {
+            .final-card h2 {
+                font-size: 2.5em;
+                margin-bottom: 30px;
+            }
         }
 
         /* Animations */
@@ -405,28 +621,13 @@
             bottom: 10px;
             right: 10px;
             color: rgba(255,255,255,0.5);
-            font-size: 0.8em;
+            font-size: 0.7em;
             font-family: monospace;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5em;
-            }
-            
-            .question {
-                font-size: 1.4em;
-            }
-
-            .word-search-grid {
-                grid-template-columns: repeat(10, 1fr);
-                gap: 3px;
-                max-width: 350px;
-            }
-
-            .word-cell {
-                font-size: 0.9em;
+        @media (min-width: 768px) {
+            .timestamp {
+                font-size: 0.8em;
             }
         }
     </style>
@@ -762,20 +963,33 @@
             const canvas = document.getElementById('flappyCanvas');
             if (!canvas) return;
             
+            // Make canvas responsive
+            function resizeCanvas() {
+                const container = canvas.parentElement;
+                const maxWidth = Math.min(400, container.clientWidth - 20);
+                canvas.width = maxWidth;
+                canvas.height = maxWidth * 1.25; // 4:5 aspect ratio
+            }
+            
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            
             const ctx = canvas.getContext('2d');
             gameStartTime = Date.now();
             
+            const scale = canvas.width / 400; // Scale factor for different screen sizes
+            
             runningGame = {
                 teresa: {
-                    x: 80,
-                    y: 400,
-                    width: 40,
-                    height: 50,
+                    x: 80 * scale,
+                    y: 400 * scale,
+                    width: 40 * scale,
+                    height: 50 * scale,
                     velocityY: 0,
-                    gravity: 1.2,
-                    jumpPower: -18,
+                    gravity: 1.2 * scale,
+                    jumpPower: -18 * scale,
                     isJumping: false,
-                    groundY: 400
+                    groundY: 400 * scale
                 },
                 obstacles: [],
                 stars: [],
@@ -783,16 +997,19 @@
                 starsCollected: 0,
                 gameOver: false,
                 gameWon: false,
-                speed: 5,
+                speed: 5 * scale,
                 frameCount: 0,
                 obstacleSpawnInterval: 80,
                 starSpawnInterval: 120,
                 gameDuration: 35000, // 35 seconds
-                groundY: 450
+                groundY: 450 * scale,
+                scale: scale,
+                canvas: canvas
             };
             
-            // Controls
-            const jump = () => {
+            // Controls - both click and touch
+            const jump = (e) => {
+                if (e) e.preventDefault();
                 if (!runningGame.teresa.isJumping && !runningGame.gameOver && !runningGame.gameWon) {
                     runningGame.teresa.velocityY = runningGame.teresa.jumpPower;
                     runningGame.teresa.isJumping = true;
@@ -800,13 +1017,24 @@
             };
             
             canvas.addEventListener('click', jump);
+            canvas.addEventListener('touchstart', jump, { passive: false });
             
-            document.addEventListener('keydown', (e) => {
+            const keyHandler = (e) => {
                 if (e.code === 'Space') {
                     e.preventDefault();
                     jump();
                 }
-            });
+            };
+            
+            document.addEventListener('keydown', keyHandler);
+            
+            // Store handlers for cleanup
+            runningGame.cleanup = () => {
+                canvas.removeEventListener('click', jump);
+                canvas.removeEventListener('touchstart', jump);
+                document.removeEventListener('keydown', keyHandler);
+                window.removeEventListener('resize', resizeCanvas);
+            };
             
             gameLoop();
         }
@@ -814,10 +1042,11 @@
         function gameLoop() {
             if (!runningGame) return;
             
-            const canvas = document.getElementById('flappyCanvas');
+            const canvas = runningGame.canvas;
             if (!canvas) return;
             
             const ctx = canvas.getContext('2d');
+            const scale = runningGame.scale;
             
             // Check if game time is up
             const elapsedTime = Date.now() - gameStartTime;
@@ -838,7 +1067,7 @@
             
             // Draw ground
             ctx.fillStyle = '#764ba2';
-            ctx.fillRect(0, runningGame.groundY, canvas.width, 50);
+            ctx.fillRect(0, runningGame.groundY, canvas.width, 50 * scale);
             
             if (!runningGame.gameOver && !runningGame.gameWon) {
                 runningGame.frameCount++;
@@ -859,9 +1088,9 @@
                     const type = Math.random() > 0.5 ? 'crate' : 'microphone';
                     runningGame.obstacles.push({
                         x: canvas.width,
-                        y: runningGame.groundY - (type === 'crate' ? 40 : 50),
-                        width: type === 'crate' ? 40 : 30,
-                        height: type === 'crate' ? 40 : 50,
+                        y: runningGame.groundY - (type === 'crate' ? 40 : 50) * scale,
+                        width: (type === 'crate' ? 40 : 30) * scale,
+                        height: (type === 'crate' ? 40 : 50) * scale,
                         type: type,
                         passed: false
                     });
@@ -871,8 +1100,8 @@
                 if (runningGame.frameCount % runningGame.starSpawnInterval === 0) {
                     runningGame.stars.push({
                         x: canvas.width,
-                        y: Math.random() * 200 + 150,
-                        size: 20,
+                        y: (Math.random() * 200 + 150) * scale,
+                        size: 20 * scale,
                         collected: false
                     });
                 }
@@ -925,7 +1154,7 @@
                 
                 // Gradually increase speed
                 if (runningGame.frameCount % 200 === 0) {
-                    runningGame.speed += 0.3;
+                    runningGame.speed += 0.3 * scale;
                 }
             }
             
@@ -936,21 +1165,21 @@
                     ctx.fillStyle = '#764ba2';
                     ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
                     ctx.strokeStyle = '#ffecd2';
-                    ctx.lineWidth = 3;
-                    ctx.strokeRect(obs.x + 5, obs.y + 5, obs.width - 10, obs.height - 10);
-                    ctx.font = '20px Arial';
+                    ctx.lineWidth = 3 * scale;
+                    ctx.strokeRect(obs.x + 5 * scale, obs.y + 5 * scale, obs.width - 10 * scale, obs.height - 10 * scale);
+                    ctx.font = `${20 * scale}px Arial`;
                     ctx.fillStyle = '#ffecd2';
-                    ctx.fillText('📦', obs.x + 10, obs.y + 28);
+                    ctx.fillText('📦', obs.x + 10 * scale, obs.y + 28 * scale);
                 } else {
                     // Draw microphone
                     ctx.fillStyle = '#764ba2';
-                    ctx.fillRect(obs.x + 5, obs.y, 20, 35);
+                    ctx.fillRect(obs.x + 5 * scale, obs.y, 20 * scale, 35 * scale);
                     ctx.beginPath();
-                    ctx.arc(obs.x + 15, obs.y + 10, 10, 0, Math.PI * 2);
+                    ctx.arc(obs.x + 15 * scale, obs.y + 10 * scale, 10 * scale, 0, Math.PI * 2);
                     ctx.fill();
                     ctx.fillStyle = '#ffecd2';
-                    ctx.font = '25px Arial';
-                    ctx.fillText('🎤', obs.x + 2, obs.y + 25);
+                    ctx.font = `${25 * scale}px Arial`;
+                    ctx.fillText('🎤', obs.x + 2 * scale, obs.y + 25 * scale);
                 }
             });
             
@@ -963,15 +1192,15 @@
             });
             
             // Draw Teresa running
-            ctx.font = '40px Arial';
+            ctx.font = `${40 * scale}px Arial`;
             const teresaEmoji = runningGame.teresa.isJumping ? '🏃‍♀️' : '🚶‍♀️';
-            ctx.fillText(teresaEmoji, runningGame.teresa.x, runningGame.teresa.y + 40);
+            ctx.fillText(teresaEmoji, runningGame.teresa.x, runningGame.teresa.y + 40 * scale);
             
             // Draw timer
             ctx.fillStyle = '#764ba2';
-            ctx.font = 'bold 24px Arial';
+            ctx.font = `bold ${24 * scale}px Arial`;
             ctx.textAlign = 'center';
-            ctx.fillText(`⏱️ ${remainingTime}s`, canvas.width / 2, 40);
+            ctx.fillText(`⏱️ ${remainingTime}s`, canvas.width / 2, 40 * scale);
             ctx.textAlign = 'left';
             
             // Game Over
@@ -979,31 +1208,37 @@
                 ctx.fillStyle = 'rgba(0,0,0,0.7)';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 ctx.fillStyle = 'white';
-                ctx.font = 'bold 30px Arial';
+                ctx.font = `bold ${30 * scale}px Arial`;
                 ctx.textAlign = 'center';
-                ctx.fillText('💥 Oops! Ostacolo colpito!', canvas.width/2, canvas.height/2 - 40);
-                ctx.font = '20px Arial';
+                ctx.fillText('💥 Oops! Ostacolo colpito!', canvas.width/2, canvas.height/2 - 40 * scale);
+                ctx.font = `${20 * scale}px Arial`;
                 ctx.fillText(`Stelle: ${runningGame.starsCollected} | Ostacoli: ${runningGame.score}`, canvas.width/2, canvas.height/2);
-                ctx.fillText('Clicca per riprovare', canvas.width/2, canvas.height/2 + 40);
+                ctx.fillText('Tocca per riprovare', canvas.width/2, canvas.height/2 + 40 * scale);
                 
-                canvas.onclick = () => {
+                const retry = () => {
+                    if (runningGame && runningGame.cleanup) {
+                        runningGame.cleanup();
+                    }
                     runningGame = null;
                     initFlappyGame();
                 };
+                
+                canvas.onclick = retry;
+                canvas.ontouchstart = retry;
             } 
             // Game Won
             else if (runningGame.gameWon) {
                 ctx.fillStyle = 'rgba(118, 75, 162, 0.9)';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 ctx.fillStyle = 'white';
-                ctx.font = 'bold 35px Arial';
+                ctx.font = `bold ${35 * scale}px Arial`;
                 ctx.textAlign = 'center';
-                ctx.fillText('🎉 Completato!', canvas.width/2, canvas.height/2 - 50);
-                ctx.font = '24px Arial';
+                ctx.fillText('🎉 Completato!', canvas.width/2, canvas.height/2 - 50 * scale);
+                ctx.font = `${24 * scale}px Arial`;
                 ctx.fillText(`⭐ Stelle: ${runningGame.starsCollected}`, canvas.width/2, canvas.height/2);
-                ctx.fillText(`🎯 Ostacoli evitati: ${runningGame.score}`, canvas.width/2, canvas.height/2 + 40);
-                ctx.font = '18px Arial';
-                ctx.fillText('Teresa ti ama! 💜', canvas.width/2, canvas.height/2 + 80);
+                ctx.fillText(`🎯 Ostacoli evitati: ${runningGame.score}`, canvas.width/2, canvas.height/2 + 40 * scale);
+                ctx.font = `${18 * scale}px Arial`;
+                ctx.fillText('Teresa ti ama! 💜', canvas.width/2, canvas.height/2 + 80 * scale);
             }
             else {
                 requestAnimationFrame(gameLoop);
