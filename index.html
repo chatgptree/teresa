@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎸 Chi Meriterà il Concerto dei Radiohead con Teresa?</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Landing Page */
+        #landing {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            animation: fadeIn 1s ease-in;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .emoji-large {
+            font-size: 5em;
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            max-width: 700px;
+            margin: 20px auto;
+            line-height: 1.6;
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .start-btn {
+            margin-top: 40px;
+            padding: 20px 50px;
+            font-size: 1.5em;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            font-weight: bold;
+            color: #764ba2;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        /* Quiz Container */
+        #quiz-container {
+            display: none;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .challenge-card {
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin: 20px auto;
+            max-width: 800px;
+            animation: slideIn 0.5s ease-out;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        .challenge-card.active {
+            opacity: 1;
+        }
+
+        .challenge-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            font-size: 1.8em;
+            margin: 20px 0;
+            color: #333;
+            font-weight: 600;
+        }
+
+        /* Multiple Choice */
+        .options {
+            display: grid;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .option {
+            padding: 20px;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border: 3px solid transparent;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            text-align: left;
+        }
+
+        .option:hover {
+            transform: translateX(10px);
+            border-color: #764ba2;
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.3);
+        }
+
+        .option.selected {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        /* Text Input */
+        textarea, input[type="text"] {
+            width: 100%;
+            padding: 20px;
+            font-size: 1.1em;
+            border: 3px solid #ffecd2;
+            border-radius: 15px;
+            margin: 20px 0;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        textarea:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: #764ba2;
+            box-shadow: 0 0 20px rgba(118, 75, 162, 0.2);
+        }
+
+        /* Slider */
+        .slider-container {
+            margin: 40px 0;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 15px;
+            border-radius: 10px;
+            background: linear-gradient(to right, #ffecd2, #764ba2);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #764ba2;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .slider-value {
+            font-size: 2em;
+            text-align: center;
+            margin: 20px 0;
+            color: #764ba2;
+            font-weight: bold;
+        }
+
+        /* Word Search Game */
+        .word-search-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 5px;
+            margin: 30px auto;
+            max-width: 500px;
+        }
+
+        .word-cell {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .word-cell:hover {
+            transform: scale(1.1);
+        }
+
+        .word-cell.found {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .words-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .word-item {
+            padding: 10px 20px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .word-item.found {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            text-decoration: line-through;
+        }
+
+        /* Flappy Game */
+        #flappyCanvas {
+            width: 100%;
+            max-width: 400px;
+            height: 500px;
+            border: 5px solid #764ba2;
+            border-radius: 20px;
+            display: block;
+            margin: 20px auto;
+            background: linear-gradient(to bottom, #a8edea 0%, #fed6e3 100%);
+        }
+
+        .game-instructions {
+            text-align: center;
+            font-size: 1.2em;
+            margin: 20px 0;
+            color: #764ba2;
+            font-weight: bold;
+        }
+
+        .game-score {
+            text-align: center;
+            font-size: 2em;
+            color: #764ba2;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        /* Image Challenge */
+        .challenge-image {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+            display: block;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Next Button */
+        .next-btn {
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            font-weight: bold;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .next-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .next-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        /* Final Screen */
+        #final-screen {
+            display: none;
+            min-height: 100vh;
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .final-card {
+            background: white;
+            border-radius: 30px;
+            padding: 50px;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #333;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .final-card h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #764ba2;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* Timestamp */
+        .timestamp {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.8em;
+            font-family: monospace;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            .question {
+                font-size: 1.4em;
+            }
+
+            .word-search-grid {
+                grid-template-columns: repeat(10, 1fr);
+                gap: 3px;
+                max-width: 350px;
+            }
+
+            .word-cell {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landing">
+        <div class="emoji-large">🎸</div>
+        <h1>Chi Meriterà il Concerto dei Radiohead con Teresa?</h1>
+        <div class="subtitle">
+            <p>Sei pronto/a a dimostrare di essere il/la compagno/a di concerto perfetto/a per Teresa?</p>
+            <p>Affronta 10 sfide tra domande, giochi e test di gusto musicale. Alla fine, Teresa saprà se sei degno/a di piangere insieme a lei durante <em>Street Spirit</em>.</p>
+            <p>🎵 Preparati a svelare la tua vera anima radioheadiana! 🎵</p>
+        </div>
+        <button class="start-btn" onclick="startQuiz()">Inizia il Test! 🚀</button>
+    </div>
+
+    <!-- Quiz Container -->
+    <div id="quiz-container">
+        <div class="container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            <div id="challenges"></div>
+        </div>
+    </div>
+
+    <!-- Final Screen -->
+    <div id="final-screen">
+        <div class="final-card">
+            <div class="emoji-large">🎉</div>
+            <h2>Test Completato!</h2>
+            <p style="font-size: 1.3em; margin: 20px 0;">Le tue risposte sono state inviate a Teresa. Ora tocca a lei decidere se meriti un posto al concerto dei Radiohead! 🎸</p>
+            <p style="font-size: 1.1em; color: #764ba2; margin-top: 30px;">Preparati a piangere insieme durante <em>How to Disappear Completely</em>... o forse no! 😉</p>
+        </div>
+    </div>
+
+    <!-- Timestamp -->
+    <div class="timestamp">Generated: <span id="timestamp"></span></div>
+
+    <script>
+        // Set timestamp
+        document.getElementById('timestamp').textContent = new Date().toLocaleString('it-IT');
+
+        const challenges = [
+            {
+                type: 'text',
+                question: 'Descrivi in tre parole come ti senti dopo aver ascoltato "How to Disappear Completely"',
+                id: 'q1'
+            },
+            {
+                type: 'multiple',
+                question: 'Cosa faresti se Thom Yorke ti guardasse dal palco?',
+                options: [
+                    '👋 Gli mando un cuore timido',
+                    '🕺 Ballo come se fossimo soli',
+                    '😳 Mi paralizzo',
+                    '😏 Gli urlo "Play Creep!" per dispetto'
+                ],
+                id: 'q2'
+            },
+            {
+                type: 'slider',
+                question: 'Da 0 a 10, quanto sei pronto/a a sopportare 8 minuti di "Everything in Its Right Place" in versione live ipnotica?',
+                id: 'q3'
+            },
+            {
+                type: 'image',
+                question: 'Cosa vedi in questa immagine?',
+                imagePlaceholder: 'kid-a-cover',
+                imageDesc: '[Copertina di Kid A - forme astratte e montagne]',
+                id: 'q4'
+            },
+            {
+                type: 'wordsearch',
+                question: 'Trova tutte le parole nascoste nella griglia!',
+                words: ['CREEP', 'TERESA', 'THOM', 'LIVE', 'LOTUS'],
+                id: 'q5'
+            },
+            {
+                type: 'multiple',
+                question: 'Quale canzone dei Radiohead ascolteresti mentre piove?',
+                options: [
+                    '☔ Exit Music (for a Film)',
+                    '💧 Pyramid Song',
+                    '🌧 Videotape',
+                    '🌀 Everything in Its Right Place'
+                ],
+                id: 'q6'
+            },
+            {
+                type: 'flappy',
+                question: 'Aiuta Teresa a correre per 35 secondi! Salta casse e microfoni, raccogli stelle! 🏃‍♀️⭐',
+                id: 'q7'
+            },
+            {
+                type: 'text',
+                question: 'Se dovessi regalare una canzone dei Radiohead a Teresa, quale sarebbe e perché?',
+                id: 'q8'
+            },
+            {
+                type: 'image',
+                question: 'Cosa sta pensando Thom Yorke in questo momento?',
+                imagePlaceholder: 'lotus-flower-dance',
+                imageDesc: '[Thom Yorke che balla nel video di Lotus Flower]',
+                id: 'q9'
+            },
+            {
+                type: 'multiple',
+                question: 'Ti arrabbi se qualcuno parla durante "Street Spirit (Fade Out)"?',
+                options: [
+                    '😤 Assolutamente sì, è sacrilegio',
+                    '😐 Un po\' fastidioso ma sopravvivo',
+                    '🤷 Non mi importa molto',
+                    '💀 Li faccio sparire come nella canzone'
+                ],
+                id: 'q10'
+            }
+        ];
+
+        let currentChallenge = 0;
+        let answers = {};
+
+        function startQuiz() {
+            document.getElementById('landing').style.display = 'none';
+            document.getElementById('quiz-container').style.display = 'block';
+            renderChallenge();
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const progress = ((currentChallenge) / challenges.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function renderChallenge() {
+            const container = document.getElementById('challenges');
+            const challenge = challenges[currentChallenge];
+            
+            let html = `
+                <div class="challenge-card active">
+                    <span class="challenge-number">Sfida ${currentChallenge + 1} di ${challenges.length}</span>
+                    <h2 class="question">${challenge.question}</h2>
+            `;
+
+            switch(challenge.type) {
+                case 'multiple':
+                    html += '<div class="options">';
+                    challenge.options.forEach((option, index) => {
+                        html += `<div class="option" onclick="selectOption(${index}, '${challenge.id}')">${option}</div>`;
+                    });
+                    html += '</div>';
+                    break;
+
+                case 'text':
+                    html += `<textarea id="${challenge.id}" rows="5" placeholder="Scrivi qui la tua risposta..."></textarea>`;
+                    break;
+
+                case 'slider':
+                    html += `
+                        <div class="slider-container">
+                            <div class="slider-value" id="sliderValue">5</div>
+                            <input type="range" min="0" max="10" value="5" id="${challenge.id}" 
+                                   oninput="document.getElementById('sliderValue').textContent = this.value">
+                        </div>
+                    `;
+                    break;
+
+                case 'image':
+                    html += `
+                        <div class="challenge-image" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); 
+                             height: 300px; display: flex; align-items: center; justify-content: center; 
+                             font-size: 1.5em; color: #764ba2; font-weight: bold;">
+                            ${challenge.imageDesc}
+                        </div>
+                        <textarea id="${challenge.id}" rows="4" placeholder="Descrivi cosa vedi o cosa ti ispira..."></textarea>
+                    `;
+                    break;
+
+                case 'wordsearch':
+                    html += renderWordSearch(challenge);
+                    break;
+
+                case 'flappy':
+                    html += `
+                        <div class="game-instructions">🏃‍♀️ Teresa corre! Clicca/Premi SPAZIO per saltare ostacoli e raccogliere stelle!</div>
+                        <div class="game-score">Punteggio: <span id="flappyScore">⭐ 0 | 🎯 0</span></div>
+                        <canvas id="flappyCanvas" width="400" height="500"></canvas>
+                    `;
+                    break;
+            }
+
+            html += `
+                    <button class="next-btn" onclick="nextChallenge()" ${challenge.type === 'flappy' ? 'id="flappyNext" style="display:none;"' : ''}>
+                        ${currentChallenge === challenges.length - 1 ? 'Invia Risposte 📧' : 'Prossima Sfida →'}
+                    </button>
+                </div>
+            `;
+
+            container.innerHTML = html;
+
+            // Initialize special challenges
+            if (challenge.type === 'wordsearch') {
+                initWordSearch();
+            } else if (challenge.type === 'flappy') {
+                setTimeout(() => initFlappyGame(), 100);
+            }
+        }
+
+        function selectOption(index, id) {
+            const options = document.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            options[index].classList.add('selected');
+            answers[id] = challenges[currentChallenge].options[index];
+        }
+
+        function renderWordSearch(challenge) {
+            const size = 10;
+            const grid = generateWordSearchGrid(challenge.words, size);
+            
+            let html = '<div class="words-list">';
+            challenge.words.forEach(word => {
+                html += `<div class="word-item" data-word="${word}">${word}</div>`;
+            });
+            html += '</div>';
+            
+            html += '<div class="word-search-grid">';
+            for (let i = 0; i < size * size; i++) {
+                const row = Math.floor(i / size);
+                const col = i % size;
+                html += `<div class="word-cell" data-row="${row}" data-col="${col}">${grid[row][col]}</div>`;
+            }
+            html += '</div>';
+            
+            return html;
+        }
+
+        function generateWordSearchGrid(words, size) {
+            const grid = Array(size).fill().map(() => Array(size).fill(''));
+            const letters = 'ABCDEFGHILMNOPQRSTUVZ';
+            
+            // Place words
+            words.forEach(word => {
+                let placed = false;
+                let attempts = 0;
+                
+                while (!placed && attempts < 50) {
+                    const direction = Math.random() < 0.5 ? 'horizontal' : 'vertical';
+                    const row = Math.floor(Math.random() * size);
+                    const col = Math.floor(Math.random() * size);
+                    
+                    if (direction === 'horizontal' && col + word.length <= size) {
+                        let canPlace = true;
+                        for (let i = 0; i < word.length; i++) {
+                            if (grid[row][col + i] !== '' && grid[row][col + i] !== word[i]) {
+                                canPlace = false;
+                                break;
+                            }
+                        }
+                        if (canPlace) {
+                            for (let i = 0; i < word.length; i++) {
+                                grid[row][col + i] = word[i];
+                            }
+                            placed = true;
+                        }
+                    } else if (direction === 'vertical' && row + word.length <= size) {
+                        let canPlace = true;
+                        for (let i = 0; i < word.length; i++) {
+                            if (grid[row + i][col] !== '' && grid[row + i][col] !== word[i]) {
+                                canPlace = false;
+                                break;
+                            }
+                        }
+                        if (canPlace) {
+                            for (let i = 0; i < word.length; i++) {
+                                grid[row + i][col] = word[i];
+                            }
+                            placed = true;
+                        }
+                    }
+                    attempts++;
+                }
+            });
+            
+            // Fill empty spaces
+            for (let i = 0; i < size; i++) {
+                for (let j = 0; j < size; j++) {
+                    if (grid[i][j] === '') {
+                        grid[i][j] = letters[Math.floor(Math.random() * letters.length)];
+                    }
+                }
+            }
+            
+            return grid;
+        }
+
+        let selectedCells = [];
+        let foundWords = [];
+
+        function initWordSearch() {
+            const cells = document.querySelectorAll('.word-cell');
+            const challenge = challenges[currentChallenge];
+            
+            cells.forEach(cell => {
+                cell.addEventListener('click', function() {
+                    this.classList.toggle('found');
+                    checkForWords();
+                });
+            });
+        }
+
+        function checkForWords() {
+            const challenge = challenges[currentChallenge];
+            const cells = document.querySelectorAll('.word-cell.found');
+            const selectedLetters = Array.from(cells).map(c => c.textContent).join('');
+            
+            challenge.words.forEach(word => {
+                if (selectedLetters.includes(word) && !foundWords.includes(word)) {
+                    foundWords.push(word);
+                    const wordItem = document.querySelector(`[data-word="${word}"]`);
+                    if (wordItem) wordItem.classList.add('found');
+                }
+            });
+            
+            answers[challenge.id] = `Parole trovate: ${foundWords.join(', ')}`;
+        }
+
+        // T-Rex Style Running Game
+        let runningGame = null;
+        let gameStartTime = null;
+
+        function initFlappyGame() {
+            const canvas = document.getElementById('flappyCanvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            gameStartTime = Date.now();
+            
+            runningGame = {
+                teresa: {
+                    x: 80,
+                    y: 400,
+                    width: 40,
+                    height: 50,
+                    velocityY: 0,
+                    gravity: 1.2,
+                    jumpPower: -18,
+                    isJumping: false,
+                    groundY: 400
+                },
+                obstacles: [],
+                stars: [],
+                score: 0,
+                starsCollected: 0,
+                gameOver: false,
+                gameWon: false,
+                speed: 5,
+                frameCount: 0,
+                obstacleSpawnInterval: 80,
+                starSpawnInterval: 120,
+                gameDuration: 35000, // 35 seconds
+                groundY: 450
+            };
+            
+            // Controls
+            const jump = () => {
+                if (!runningGame.teresa.isJumping && !runningGame.gameOver && !runningGame.gameWon) {
+                    runningGame.teresa.velocityY = runningGame.teresa.jumpPower;
+                    runningGame.teresa.isJumping = true;
+                }
+            };
+            
+            canvas.addEventListener('click', jump);
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.code === 'Space') {
+                    e.preventDefault();
+                    jump();
+                }
+            });
+            
+            gameLoop();
+        }
+
+        function gameLoop() {
+            if (!runningGame) return;
+            
+            const canvas = document.getElementById('flappyCanvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            
+            // Check if game time is up
+            const elapsedTime = Date.now() - gameStartTime;
+            const remainingTime = Math.max(0, Math.ceil((runningGame.gameDuration - elapsedTime) / 1000));
+            
+            if (elapsedTime >= runningGame.gameDuration && !runningGame.gameWon && !runningGame.gameOver) {
+                runningGame.gameWon = true;
+                answers[challenges[currentChallenge].id] = `Gioco completato! Stelle raccolte: ${runningGame.starsCollected}, Ostacoli evitati: ${runningGame.score}`;
+                document.getElementById('flappyNext').style.display = 'block';
+            }
+            
+            // Clear canvas with gradient background
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, '#a8edea');
+            gradient.addColorStop(1, '#fed6e3');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw ground
+            ctx.fillStyle = '#764ba2';
+            ctx.fillRect(0, runningGame.groundY, canvas.width, 50);
+            
+            if (!runningGame.gameOver && !runningGame.gameWon) {
+                runningGame.frameCount++;
+                
+                // Update Teresa
+                runningGame.teresa.velocityY += runningGame.teresa.gravity;
+                runningGame.teresa.y += runningGame.teresa.velocityY;
+                
+                // Ground collision
+                if (runningGame.teresa.y >= runningGame.teresa.groundY) {
+                    runningGame.teresa.y = runningGame.teresa.groundY;
+                    runningGame.teresa.velocityY = 0;
+                    runningGame.teresa.isJumping = false;
+                }
+                
+                // Spawn obstacles (crates and microphones)
+                if (runningGame.frameCount % runningGame.obstacleSpawnInterval === 0) {
+                    const type = Math.random() > 0.5 ? 'crate' : 'microphone';
+                    runningGame.obstacles.push({
+                        x: canvas.width,
+                        y: runningGame.groundY - (type === 'crate' ? 40 : 50),
+                        width: type === 'crate' ? 40 : 30,
+                        height: type === 'crate' ? 40 : 50,
+                        type: type,
+                        passed: false
+                    });
+                }
+                
+                // Spawn stars
+                if (runningGame.frameCount % runningGame.starSpawnInterval === 0) {
+                    runningGame.stars.push({
+                        x: canvas.width,
+                        y: Math.random() * 200 + 150,
+                        size: 20,
+                        collected: false
+                    });
+                }
+                
+                // Update obstacles
+                runningGame.obstacles.forEach((obs, index) => {
+                    obs.x -= runningGame.speed;
+                    
+                    // Check collision
+                    if (runningGame.teresa.x < obs.x + obs.width &&
+                        runningGame.teresa.x + runningGame.teresa.width > obs.x &&
+                        runningGame.teresa.y < obs.y + obs.height &&
+                        runningGame.teresa.y + runningGame.teresa.height > obs.y) {
+                        runningGame.gameOver = true;
+                    }
+                    
+                    // Score for passing obstacle
+                    if (!obs.passed && obs.x + obs.width < runningGame.teresa.x) {
+                        obs.passed = true;
+                        runningGame.score++;
+                        document.getElementById('flappyScore').textContent = `⭐ ${runningGame.starsCollected} | 🎯 ${runningGame.score}`;
+                    }
+                    
+                    // Remove off-screen obstacles
+                    if (obs.x + obs.width < 0) {
+                        runningGame.obstacles.splice(index, 1);
+                    }
+                });
+                
+                // Update stars
+                runningGame.stars.forEach((star, index) => {
+                    star.x -= runningGame.speed;
+                    
+                    // Check collection
+                    if (!star.collected &&
+                        runningGame.teresa.x < star.x + star.size &&
+                        runningGame.teresa.x + runningGame.teresa.width > star.x &&
+                        runningGame.teresa.y < star.y + star.size &&
+                        runningGame.teresa.y + runningGame.teresa.height > star.y) {
+                        star.collected = true;
+                        runningGame.starsCollected++;
+                        document.getElementById('flappyScore').textContent = `⭐ ${runningGame.starsCollected} | 🎯 ${runningGame.score}`;
+                    }
+                    
+                    // Remove off-screen or collected stars
+                    if (star.x + star.size < 0 || star.collected) {
+                        runningGame.stars.splice(index, 1);
+                    }
+                });
+                
+                // Gradually increase speed
+                if (runningGame.frameCount % 200 === 0) {
+                    runningGame.speed += 0.3;
+                }
+            }
+            
+            // Draw obstacles
+            runningGame.obstacles.forEach(obs => {
+                if (obs.type === 'crate') {
+                    // Draw crate
+                    ctx.fillStyle = '#764ba2';
+                    ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+                    ctx.strokeStyle = '#ffecd2';
+                    ctx.lineWidth = 3;
+                    ctx.strokeRect(obs.x + 5, obs.y + 5, obs.width - 10, obs.height - 10);
+                    ctx.font = '20px Arial';
+                    ctx.fillStyle = '#ffecd2';
+                    ctx.fillText('📦', obs.x + 10, obs.y + 28);
+                } else {
+                    // Draw microphone
+                    ctx.fillStyle = '#764ba2';
+                    ctx.fillRect(obs.x + 5, obs.y, 20, 35);
+                    ctx.beginPath();
+                    ctx.arc(obs.x + 15, obs.y + 10, 10, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = '#ffecd2';
+                    ctx.font = '25px Arial';
+                    ctx.fillText('🎤', obs.x + 2, obs.y + 25);
+                }
+            });
+            
+            // Draw stars
+            runningGame.stars.forEach(star => {
+                if (!star.collected) {
+                    ctx.font = `${star.size}px Arial`;
+                    ctx.fillText('⭐', star.x, star.y);
+                }
+            });
+            
+            // Draw Teresa running
+            ctx.font = '40px Arial';
+            const teresaEmoji = runningGame.teresa.isJumping ? '🏃‍♀️' : '🚶‍♀️';
+            ctx.fillText(teresaEmoji, runningGame.teresa.x, runningGame.teresa.y + 40);
+            
+            // Draw timer
+            ctx.fillStyle = '#764ba2';
+            ctx.font = 'bold 24px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(`⏱️ ${remainingTime}s`, canvas.width / 2, 40);
+            ctx.textAlign = 'left';
+            
+            // Game Over
+            if (runningGame.gameOver) {
+                ctx.fillStyle = 'rgba(0,0,0,0.7)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 30px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('💥 Oops! Ostacolo colpito!', canvas.width/2, canvas.height/2 - 40);
+                ctx.font = '20px Arial';
+                ctx.fillText(`Stelle: ${runningGame.starsCollected} | Ostacoli: ${runningGame.score}`, canvas.width/2, canvas.height/2);
+                ctx.fillText('Clicca per riprovare', canvas.width/2, canvas.height/2 + 40);
+                
+                canvas.onclick = () => {
+                    runningGame = null;
+                    initFlappyGame();
+                };
+            } 
+            // Game Won
+            else if (runningGame.gameWon) {
+                ctx.fillStyle = 'rgba(118, 75, 162, 0.9)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 35px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('🎉 Completato!', canvas.width/2, canvas.height/2 - 50);
+                ctx.font = '24px Arial';
+                ctx.fillText(`⭐ Stelle: ${runningGame.starsCollected}`, canvas.width/2, canvas.height/2);
+                ctx.fillText(`🎯 Ostacoli evitati: ${runningGame.score}`, canvas.width/2, canvas.height/2 + 40);
+                ctx.font = '18px Arial';
+                ctx.fillText('Teresa ti ama! 💜', canvas.width/2, canvas.height/2 + 80);
+            }
+            else {
+                requestAnimationFrame(gameLoop);
+            }
+        }
+
+        function nextChallenge() {
+            const challenge = challenges[currentChallenge];
+            
+            // Save answer
+            if (challenge.type === 'text') {
+                answers[challenge.id] = document.getElementById(challenge.id).value;
+            } else if (challenge.type === 'slider') {
+                answers[challenge.id] = document.getElementById(challenge.id).value;
+            } else if (challenge.type === 'image') {
+                answers[challenge.id] = document.getElementById(challenge.id).value;
+            }
+            
+            currentChallenge++;
+            
+            if (currentChallenge < challenges.length) {
+                renderChallenge();
+                updateProgress();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                submitAnswers();
+            }
+        }
+
+        function submitAnswers() {
+            // Prepare email content
+            let emailContent = '🎸 RISULTATI TEST RADIOHEAD - Candidato per il Concerto con Teresa\n\n';
+            
+            challenges.forEach((challenge, index) => {
+                emailContent += `${index + 1}. ${challenge.question}\n`;
+                emailContent += `Risposta: ${answers[challenge.id] || 'Non risposto'}\n\n`;
+            });
+            
+            emailContent += '\n---\nTest completato il: ' + new Date().toLocaleString('it-IT');
+            
+            // Create form and submit
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'https://formsubmit.co/INSERISCI_EMAIL_TERESA_QUI'; // ⚠️ REPLACE WITH TERESA'S EMAIL
+            
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'message';
+            input.value = emailContent;
+            form.appendChild(input);
+            
+            // Add subject
+            const subject = document.createElement('input');
+            subject.type = 'hidden';
+            subject.name = '_subject';
+            subject.value = '🎸 Nuovo Candidato per il Concerto Radiohead!';
+            form.appendChild(subject);
+            
+            // Disable captcha
+            const captcha = document.createElement('input');
+            captcha.type = 'hidden';
+            captcha.name = '_captcha';
+            captcha.value = 'false';
+            form.appendChild(captcha);
+            
+            document.body.appendChild(form);
+            form.submit();
+            
+            // Show final screen
+            document.getElementById('quiz-container').style.display = 'none';
+            document.getElementById('final-screen').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
