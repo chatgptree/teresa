@@ -963,6 +963,10 @@
             const canvas = document.getElementById('flappyCanvas');
             if (!canvas) return;
             
+            // Detect if mobile device
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
+                          || window.innerWidth < 768;
+            
             // Make canvas responsive
             function resizeCanvas() {
                 const container = canvas.parentElement;
@@ -979,6 +983,29 @@
             
             const scale = canvas.width / 400; // Scale factor for different screen sizes
             
+            // Mobile-optimized physics parameters
+            const mobilePhysics = {
+                gravity: 0.8 * scale,          // Reduced gravity = more hang time
+                jumpPower: -20 * scale,        // Higher jump
+                baseSpeed: 3.5 * scale,        // Slower initial speed
+                speedIncrease: 0.2 * scale,    // Slower acceleration
+                obstacleInterval: 100,         // More time between obstacles
+                starInterval: 140
+            };
+            
+            // Desktop physics parameters
+            const desktopPhysics = {
+                gravity: 1.2 * scale,
+                jumpPower: -18 * scale,
+                baseSpeed: 5 * scale,
+                speedIncrease: 0.3 * scale,
+                obstacleInterval: 80,
+                starInterval: 120
+            };
+            
+            // Select physics based on device
+            const physics = isMobile ? mobilePhysics : desktopPhysics;
+            
             runningGame = {
                 teresa: {
                     x: 80 * scale,
@@ -986,8 +1013,8 @@
                     width: 40 * scale,
                     height: 50 * scale,
                     velocityY: 0,
-                    gravity: 1.2 * scale,
-                    jumpPower: -18 * scale,
+                    gravity: physics.gravity,
+                    jumpPower: physics.jumpPower,
                     isJumping: false,
                     groundY: 400 * scale
                 },
@@ -997,22 +1024,30 @@
                 starsCollected: 0,
                 gameOver: false,
                 gameWon: false,
-                speed: 5 * scale,
+                speed: physics.baseSpeed,
+                baseSpeed: physics.baseSpeed,
+                speedIncrease: physics.speedIncrease,
                 frameCount: 0,
-                obstacleSpawnInterval: 80,
-                starSpawnInterval: 120,
+                obstacleSpawnInterval: physics.obstacleInterval,
+                starSpawnInterval: physics.starInterval,
                 gameDuration: 35000, // 35 seconds
                 groundY: 450 * scale,
                 scale: scale,
-                canvas: canvas
+                canvas: canvas,
+                isMobile: isMobile
             };
             
-            // Controls - both click and touch
+            // Controls - both click and touch with better mobile response
+            let jumpCooldown = false;
             const jump = (e) => {
                 if (e) e.preventDefault();
-                if (!runningGame.teresa.isJumping && !runningGame.gameOver && !runningGame.gameWon) {
+                if (!jumpCooldown && !runningGame.teresa.isJumping && !runningGame.gameOver && !runningGame.gameWon) {
                     runningGame.teresa.velocityY = runningGame.teresa.jumpPower;
                     runningGame.teresa.isJumping = true;
+                    
+                    // Small cooldown to prevent double-jumps on touch
+                    jumpCooldown = true;
+                    setTimeout(() => jumpCooldown = false, 100);
                 }
             };
             
@@ -1072,7 +1107,7 @@
             if (!runningGame.gameOver && !runningGame.gameWon) {
                 runningGame.frameCount++;
                 
-                // Update Teresa
+                // Update Teresa with mobile-optimized physics
                 runningGame.teresa.velocityY += runningGame.teresa.gravity;
                 runningGame.teresa.y += runningGame.teresa.velocityY;
                 
@@ -1083,7 +1118,7 @@
                     runningGame.teresa.isJumping = false;
                 }
                 
-                // Spawn obstacles (crates and microphones)
+                // Spawn obstacles (crates and microphones) - mobile optimized
                 if (runningGame.frameCount % runningGame.obstacleSpawnInterval === 0) {
                     const type = Math.random() > 0.5 ? 'crate' : 'microphone';
                     runningGame.obstacles.push({
@@ -1096,7 +1131,7 @@
                     });
                 }
                 
-                // Spawn stars
+                // Spawn stars - mobile optimized
                 if (runningGame.frameCount % runningGame.starSpawnInterval === 0) {
                     runningGame.stars.push({
                         x: canvas.width,
@@ -1110,11 +1145,12 @@
                 runningGame.obstacles.forEach((obs, index) => {
                     obs.x -= runningGame.speed;
                     
-                    // Check collision
-                    if (runningGame.teresa.x < obs.x + obs.width &&
-                        runningGame.teresa.x + runningGame.teresa.width > obs.x &&
-                        runningGame.teresa.y < obs.y + obs.height &&
-                        runningGame.teresa.y + runningGame.teresa.height > obs.y) {
+                    // Check collision with slightly more forgiving hitbox on mobile
+                    const hitboxPadding = runningGame.isMobile ? 5 * scale : 0;
+                    if (runningGame.teresa.x + hitboxPadding < obs.x + obs.width &&
+                        runningGame.teresa.x + runningGame.teresa.width - hitboxPadding > obs.x &&
+                        runningGame.teresa.y + hitboxPadding < obs.y + obs.height &&
+                        runningGame.teresa.y + runningGame.teresa.height - hitboxPadding > obs.y) {
                         runningGame.gameOver = true;
                     }
                     
@@ -1152,9 +1188,9 @@
                     }
                 });
                 
-                // Gradually increase speed
+                // Gradually increase speed - slower on mobile
                 if (runningGame.frameCount % 200 === 0) {
-                    runningGame.speed += 0.3 * scale;
+                    runningGame.speed += runningGame.speedIncrease;
                 }
             }
             
