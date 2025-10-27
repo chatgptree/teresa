@@ -963,25 +963,34 @@
             const canvas = document.getElementById('flappyCanvas');
             if (!canvas) return;
             
+            // CRITICAL: Remove any existing event listeners first
+            canvas.onclick = null;
+            canvas.ontouchstart = null;
+            const oldCanvas = canvas.cloneNode(true);
+            canvas.parentNode.replaceChild(oldCanvas, canvas);
+            const cleanCanvas = document.getElementById('flappyCanvas');
+            
             // Detect if mobile device
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
                           || window.innerWidth < 768;
             
             // Make canvas responsive
             function resizeCanvas() {
-                const container = canvas.parentElement;
+                const container = cleanCanvas.parentElement;
                 const maxWidth = Math.min(400, container.clientWidth - 20);
-                canvas.width = maxWidth;
-                canvas.height = maxWidth * 1.25; // 4:5 aspect ratio
+                cleanCanvas.width = maxWidth;
+                cleanCanvas.height = maxWidth * 1.25; // 4:5 aspect ratio
             }
             
             resizeCanvas();
-            window.addEventListener('resize', resizeCanvas);
             
-            const ctx = canvas.getContext('2d');
+            const resizeHandler = () => resizeCanvas();
+            window.addEventListener('resize', resizeHandler);
+            
+            const ctx = cleanCanvas.getContext('2d');
             gameStartTime = Date.now();
             
-            const scale = canvas.width / 400; // Scale factor for different screen sizes
+            const scale = cleanCanvas.width / 400; // Scale factor for different screen sizes
             
             // Mobile-optimized physics parameters
             const mobilePhysics = {
@@ -1033,8 +1042,9 @@
                 gameDuration: 35000, // 35 seconds
                 groundY: 450 * scale,
                 scale: scale,
-                canvas: canvas,
-                isMobile: isMobile
+                canvas: cleanCanvas,
+                isMobile: isMobile,
+                listeners: []
             };
             
             // Controls - both click and touch with better mobile response
@@ -1051,9 +1061,6 @@
                 }
             };
             
-            canvas.addEventListener('click', jump);
-            canvas.addEventListener('touchstart', jump, { passive: false });
-            
             const keyHandler = (e) => {
                 if (e.code === 'Space') {
                     e.preventDefault();
@@ -1061,14 +1068,19 @@
                 }
             };
             
+            // Add listeners and store references
+            cleanCanvas.addEventListener('click', jump);
+            cleanCanvas.addEventListener('touchstart', jump, { passive: false });
             document.addEventListener('keydown', keyHandler);
             
-            // Store handlers for cleanup
+            // Store cleanup function
             runningGame.cleanup = () => {
-                canvas.removeEventListener('click', jump);
-                canvas.removeEventListener('touchstart', jump);
+                cleanCanvas.removeEventListener('click', jump);
+                cleanCanvas.removeEventListener('touchstart', jump);
                 document.removeEventListener('keydown', keyHandler);
-                window.removeEventListener('resize', resizeCanvas);
+                window.removeEventListener('resize', resizeHandler);
+                cleanCanvas.onclick = null;
+                cleanCanvas.ontouchstart = null;
             };
             
             gameLoop();
@@ -1251,14 +1263,26 @@
                 ctx.fillText(`Stelle: ${runningGame.starsCollected} | Ostacoli: ${runningGame.score}`, canvas.width/2, canvas.height/2);
                 ctx.fillText('Tocca per riprovare', canvas.width/2, canvas.height/2 + 40 * scale);
                 
-                const retry = () => {
+                // Use a single-use listener to prevent accumulation
+                let retryHandled = false;
+                const retry = (e) => {
+                    if (retryHandled) return;
+                    retryHandled = true;
+                    e.preventDefault();
+                    
+                    // Cleanup old game
                     if (runningGame && runningGame.cleanup) {
                         runningGame.cleanup();
                     }
                     runningGame = null;
-                    initFlappyGame();
+                    
+                    // Small delay to prevent immediate re-trigger
+                    setTimeout(() => {
+                        initFlappyGame();
+                    }, 200);
                 };
                 
+                // Single assignment, no addEventListener
                 canvas.onclick = retry;
                 canvas.ontouchstart = retry;
             } 
